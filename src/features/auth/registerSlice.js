@@ -12,6 +12,8 @@ const registerSlice = createSlice({
     initialState,
     reducers: {
         registerStart(state, action) {
+        },
+        registerLoading(state, action) {
             state.regLoading = true
         },
         registerSuccess(state, action) {
@@ -28,7 +30,7 @@ const registerSlice = createSlice({
 })
 
 //actions
-export const { registerStart, registerSuccess, registerFailed } = registerSlice.actions
+export const { registerStart, registerLoading, registerSuccess, registerFailed } = registerSlice.actions
 
 //reducer
 const registerReducer = registerSlice.reducer;

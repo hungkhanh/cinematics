@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box } from "@mui/material";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -9,13 +9,9 @@ import { Link } from "react-router-dom";
 const schema = yup.object().shape({
   taiKhoan: yup.string().required("Please fill this"),
   matKhau: yup.string().required("Please fill this"),
-  email: yup.string().required("Please fill this"),
-  soDt: yup.string().required("Please fill this"),
-  maNhom: yup.string().required("Please fill this"),
-  hoTen: yup.string().required("Please fill this"),
 });
 
-function RegisterForm({ initialValues, onSubmit, regResponseData }) {
+function LoginForm({ initialValues, onSubmit, loginResponseData }) {
   const [error, setError] = useState("");
   const { control, handleSubmit, reset } = useForm({
     defaultValues: initialValues,
@@ -26,7 +22,7 @@ function RegisterForm({ initialValues, onSubmit, regResponseData }) {
     try {
       setError("");
       await onSubmit?.(formValues);
-      if (regResponseData) {
+      if (loginResponseData) {
         reset();
       }
     } catch (error) {
@@ -47,30 +43,26 @@ function RegisterForm({ initialValues, onSubmit, regResponseData }) {
       }}
     >
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <Link
-          to="/login"
-          className="text-[0.9rem] text-cyan-700 hover:text-cyan-500"
-        >
-          {"< Back to Login"}
-        </Link>
         <div className="text-[#0b847a] text-[3rem] font-semibold text-center">
-          Registration
+          SIGN IN
         </div>
         <InputField name="taiKhoan" control={control} label="Account" />
         <InputField name="matKhau" control={control} label="Password" />
-        <InputField name="email" control={control} label="Email" />
-        <InputField name="soDt" control={control} label="Phone Number" />
-        <InputField name="maNhom" control={control} label="Group Name" />
-        <InputField name="hoTen" control={control} label="Name" />
 
         <Box sx={{ marginTop: "1.5rem" }}>
-          <button className="bg-[#0b847a] hover:bg-[#0f9489] w-full rounded-md p-3 text-white text-xl">
-            SIGN UP
+          <button className=" mb-[0.85rem] bg-[#0b847a] hover:bg-[#0f9489] w-full rounded-md p-3 text-white text-xl">
+            ENTER
           </button>
+          <Link
+            to="/register"
+            className="text-[0.9rem] underline text-fuchsia-600 hover:text-fuchsia-400"
+          >
+            Don't have an account? Sign up!
+          </Link>
         </Box>
       </form>
     </Box>
   );
 }
 
-export default RegisterForm;
+export default LoginForm;

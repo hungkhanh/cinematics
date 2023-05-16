@@ -1,12 +1,11 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
-import { registerFailed, registerStart, registerSuccess } from './registerSlice'
-import userManagementApi from '../../api/userManagementApi'
-import { setToken } from './authSlice'
 import { toast } from "react-toastify";
+import { call, put, takeLatest } from 'redux-saga/effects';
+import userManagementApi from '../../api/userManagementApi';
+import { registerStart, registerSuccess, registerFailed, registerLoading } from './registerSlice';
 
 function* registerUser(action) {
     try {
-        // yield put(registerStart())
+        yield put(registerLoading())
         const response = yield call(userManagementApi.signUp, action.payload)
         if (response) {
             toast("Register account successfully!", { autoClose: 800 });
@@ -19,8 +18,7 @@ function* registerUser(action) {
     } catch (error) {
         const errorMessage = error?.response?.data?.content
         toast(errorMessage, { autoClose: 1000 });
-
-        // yield put(registerFailed(errorMessage))
+        yield put(registerFailed(errorMessage))
     }
 }
 
