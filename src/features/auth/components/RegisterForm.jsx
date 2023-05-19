@@ -35,7 +35,7 @@ function RegisterForm({ initialValues, onSubmit, regResponseData }) {
   };
   return (
     <Box
-      maxWidth={400}
+      minWidth={400}
       sx={{
         position: "absolute",
         top: "50%",
@@ -44,6 +44,7 @@ function RegisterForm({ initialValues, onSubmit, regResponseData }) {
         padding: "2rem",
         backgroundColor: "white",
         borderRadius: "7px",
+        boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
       }}
     >
       <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -54,14 +55,20 @@ function RegisterForm({ initialValues, onSubmit, regResponseData }) {
           {"< Back to Login"}
         </Link>
         <div className="text-[#0b847a] text-[3rem] font-semibold text-center">
-          Registration
+          ReGistrA
         </div>
-        <InputField name="taiKhoan" control={control} label="Account" />
-        <InputField name="matKhau" control={control} label="Password" />
-        <InputField name="email" control={control} label="Email" />
-        <InputField name="soDt" control={control} label="Phone Number" />
-        <InputField name="maNhom" control={control} label="Group Name" />
-        <InputField name="hoTen" control={control} label="Name" />
+        <div className="flex gap-[1.5rem]">
+          <div>
+            <InputField name="taiKhoan" control={control} label="Account" />
+            <InputField name="email" control={control} label="Email" />
+            <InputField name="hoTen" control={control} label="Name" />
+          </div>
+          <div>
+            <InputField name="matKhau" control={control} label="Password" />
+            <InputField name="soDt" control={control} label="Phone Number" />
+            <InputField name="maNhom" control={control} label="Group Name" />
+          </div>
+        </div>
 
         <Box sx={{ marginTop: "1.5rem" }}>
           <button className="bg-[#0b847a] hover:bg-[#0f9489] w-full rounded-md p-3 text-white text-xl">

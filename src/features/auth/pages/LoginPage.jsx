@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginStart } from "../loginSlice";
 import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
-import { gradientAnimation } from "../../../components/Common/GradientAnimation/gradientAnimation";
+import { gradientAnimation } from "../../../utils";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ function LoginPage() {
         background:
           "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
         backgroundSize: "400% 400%",
-        animation: `${gradientAnimation} 5s ease infinite`,
+        animation: `${gradientAnimation} 3s ease infinite`,
       }}
     >
       <LoginForm

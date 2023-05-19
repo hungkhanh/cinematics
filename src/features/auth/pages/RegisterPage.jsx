@@ -6,7 +6,7 @@ import RegisterForm from "../components/RegisterForm";
 import { registerStart } from "../registerSlice";
 import { Box } from "@mui/material";
 import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
-import { gradientAnimation } from "../../../components/Common/GradientAnimation/gradientAnimation";
+import { gradientAnimation } from "../../../utils";
 
 function RegisterPage() {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ function RegisterPage() {
         background:
           "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",
         backgroundSize: "400% 400%",
-        animation: `${gradientAnimation} 5s ease infinite`,
+        animation: `${gradientAnimation} 3s ease infinite`,
       }}
     >
       <RegisterForm

@@ -9,7 +9,7 @@ function* loginUser(action) {
         const response = yield call(userManagementApi.signIn, action.payload)
 
         if (response) {
-            toast("Login successfully!", { autoClose: 800 });
+            toast("Login successfully!", { autoClose: 500, position: "top-right" });
             yield put(loginSuccess(response?.content))
             localStorage.setItem('token', response?.content?.accessToken)
         }
