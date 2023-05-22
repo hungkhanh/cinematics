@@ -5,14 +5,22 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 function Footer() {
   return (
-    <div className="text-[#ccc] px-[15rem] pt-[5rem] pb-[2rem] leading-[2.25rem]">
+    <div
+      className="sm:block text-[#ccc] 
+    px-[2rem] sm:px-[3rem] lg:px-[7rem] xl:px-[10rem] pt-[2rem] lg:pt-[3rem] 
+   pb-[1rem] sm:pb-[2rem]
+     leading-[1.5rem] sm:leading-[1.9rem] lg:leading-[2.25rem]"
+    >
       <div className="flex gap-2 items-center mb-3">
         <FacebookIcon sx={{ fontSize: "2.5rem" }} />
         <InstagramIcon sx={{ fontSize: "2.5rem" }} />
         <TwitterIcon sx={{ fontSize: "2.5rem" }} />
         <YouTubeIcon sx={{ fontSize: "2.5rem" }} />
       </div>
-      <div className="flex justify-between gap-20 ">
+      <div
+        className="flex justify-between gap-7 xl:gap-3 
+      text-[0.78rem] sm:text-[0.9rem] md:text-[1.1rem]"
+      >
         <div>
           <div>Audio and Subtities</div>
           <div>Press</div>

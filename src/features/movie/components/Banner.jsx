@@ -23,7 +23,10 @@ function Banner({}) {
   }, []);
 
   return (
-    <div className="relative h-[40rem]" style={{ textShadow: "1px 1px #333" }}>
+    <div
+      className="relative h-[30rem] md:h-[35rem] lg:h-[40rem]"
+      style={{ textShadow: "1px 1px #333" }}
+    >
       <img
         className="absolute object-fill w-full h-full"
         src={
@@ -40,8 +43,11 @@ function Banner({}) {
         }
         alt="failImg"
       />
-      <div className="absolute text-white top-[28%] ml-[3rem]">
-        <div className="text-[4.5rem] font-bold w-[80%] leading-[5rem]">
+      <div className="absolute z-20 text-white top-[20%] lg:top-[28%] ml-[3rem]">
+        <div
+          className="text-[3.5rem] sm:text-[4rem] lg:text-[4.5rem] font-bold w-[80%]
+         leading-[4rem] sm:leading-[4.1rem] lg:leading-[5rem]"
+        >
           {movie?.original_title ||
             movie?.title ||
             movie?.original_name ||
@@ -63,7 +69,7 @@ function Banner({}) {
             More Info
           </Link>
         </div>
-        <div className="w-[45%]">
+        <div className=" w-[80%] sm:w-[75%] xl:w-[55%]">
           {truncateText(
             `${
               movie?.overview ||

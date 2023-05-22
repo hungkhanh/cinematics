@@ -39,7 +39,7 @@ function Header() {
     <div
       className={`navbar ${
         showNav && "bg-[#080808]"
-      } fixed top-0 w-full z-10 text-white flex justify-between 
+      } fixed top-0 w-full z-30 text-white flex justify-between 
       items-center py-[2.25rem] transition-all ease-in delay-[150ms]`}
     >
       <div className="flex items-center gap-2 fixed z-10 left-9">
@@ -48,7 +48,10 @@ function Header() {
           Cinematics
         </Link>
       </div>
-      <div className="flex gap-7 font-semibold items-center fixed left-[35%] z-10 ">
+      <div
+        className="hidden lg:flex lg:gap-5 font-semibold items-center
+       fixed lg:left-[31%] xl:left-[35%] 2xl:left-[39%] z-10 "
+      >
         <NavLink className={navLinkStyles} to="/main">
           Home
         </NavLink>

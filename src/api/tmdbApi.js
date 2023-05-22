@@ -6,9 +6,9 @@ const tmdbApi = {
         const url = requests.fetchTrending
         return axiosTMDB.get(url)
     },
-    getMovieById(id) {
-        const url = requests.getMovieById
-        return axiosTMDB.get(url, id)
+    getMovieById() {
+        const url = `/movie`
+        return axiosTMDB.get(url)
     },
 
 };
