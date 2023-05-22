@@ -12,7 +12,7 @@ function Header() {
     return isActive ? "nav-link activated" : "nav-link";
   };
 
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
 
   const transitionNavBar = () => {
     if (window.scrollY > 150) {
