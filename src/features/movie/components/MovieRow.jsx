@@ -59,15 +59,12 @@ function MovieRow({ title, fetchUrl }) {
               shadow-lg object-fill"
             />
             <div className="text-white mt-1">
-              {truncateText(
-                `${
-                  movie?.original_title ||
-                  movie?.title ||
-                  movie?.original_name ||
-                  "Name"
-                }`,
-                30
-              )}
+              {`${
+                movie?.original_title ||
+                movie?.title ||
+                movie?.original_name ||
+                "Name"
+              }`}
             </div>
           </Link>
         ))}

@@ -69,7 +69,7 @@ function Banner({}) {
             More Info
           </Link>
         </div>
-        <div className=" w-[80%] sm:w-[75%] xl:w-[55%]">
+        <div className=" w-[80%] sm:w-[75%] xl:w-[45%]">
           {truncateText(
             `${
               movie?.overview ||
