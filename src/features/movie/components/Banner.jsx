@@ -12,9 +12,7 @@ function Banner({}) {
       try {
         const response = await tmdbApi.getBanner();
         setMovie(
-          response?.results[
-            Math.floor(Math.random() * response.results.length - 1)
-          ]
+          response?.results[Math.floor(Math.random() * response.results.length)]
         );
       } catch (error) {
         console.log(error);
@@ -28,7 +26,7 @@ function Banner({}) {
       style={{ textShadow: "1px 1px #333" }}
     >
       <img
-        className="absolute object-fill w-full h-full"
+        className="absolute bg-auto object-cover bg-center w-full h-full"
         src={
           (movie &&
             ((movie?.backdrop_path &&

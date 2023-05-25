@@ -68,24 +68,44 @@ function MovieDetail() {
     navigate(`/movie/${rcmId}`, { top: true });
   };
 
+  const checkHeightForRendering = (list) => {
+    if (list.length === 0) {
+      return `h-[80rem] sm:h-[80rem]`;
+    }
+    if (list.length === 1) {
+      return `h-[95rem] sm:h-[135rem]`;
+    }
+    if (list.length === 2) {
+      return `h-[120rem] sm:h-[135rem] md:h-[140rem] lg:h-[155rem] xl:h-[170rem] 2xl:h-[180rem]`;
+    }
+    if (list.length === 3) {
+      return `h-[145rem] sm:h-[165rem] md:h-[170rem] lg:h-[190rem] 2xl:h-[225rem]`;
+    }
+  };
+
   return (
-    <div className="h-[225rem]" style={{ textShadow: "1px 1px #333" }}>
+    <div
+      className={checkHeightForRendering(videoList?.splice(0, 2))}
+      style={{ textShadow: "1px 1px #333" }}
+    >
       <div className="h-[70rem] relative w-full ">
         <ReactPlayer
-          className="absolute mt-[-11rem]"
+          className="absolute mt-[-16rem]"
           width="100%"
           height="100%"
           url={`https://www.youtube.com/watch?v=${
-            videoList[Math.floor(Math.random() * videoList.length - 1)]?.key
+            videoList[Math.floor(Math.random() * videoList.length)]?.key ||
+            "4Sfu5eAQ5sk"
           }`}
           playing
           muted
-          loop="true"
+          loop={true}
         />
-        <div className="absolute w-full text-white z-10 mt-[12rem]">
+        <div className="absolute w-full text-white z-10 mt-[8rem] md:mt-[12rem] duration-100 transition-all delay-[30ms]">
           {/* Info */}
-          <div className="flex justify-center gap-9 ">
-            <div className="w-[20%] sm:h-[32rem]">
+          <div className="w-full flex justify-center gap-9 px-8 md:px-14 lg:p-12 xl:p-0 duration-100 transition-all delay-[30ms]">
+            {/* Thumbnail n IMDB */}
+            <div className="hidden xl:block xl:w-[30%] 2xl:w-[20%] lg:h-[32rem] duration-100 transition-all delay-[30ms]">
               <img
                 className="h-full w-full bg-auto object-cover bg-center shadow-rose-500/50 rounded-3xl 
                   shadow-lg"
@@ -110,16 +130,23 @@ function MovieDetail() {
               </div>
             </div>
 
-            <div className="w-[50%] mt-[-1rem]">
-              <div className="text-[4.2rem] sm:text-[4.6rem] font-bold w-[80%] leading-[5rem]">
+            <div className="w-full xl:w-[50%] mt-[-1rem] md:mt-[-4rem] xl:mt-[-1rem] duration-100 transition-all delay-[30ms]">
+              {/* Title */}
+              <div
+                className="text-[4rem] sm:text-[4.2rem] md:text-[4.4rem] lg:text-[4.5rem] xl:text-[4.6rem]
+               font-bold w-full leading-[5rem] duration-100 transition-all delay-[30ms]"
+              >
                 {movie?.original_title || movie?.title}
               </div>
 
-              <div className="flex gap-3 items-center">
+              <div
+                className="text-[0.9rem] sm:text-[0.95rem] md:text-[1rem] flex flex-wrap 2xl:flex-nowrap gap-3
+               items-center my-4 duration-100 transition-all delay-[30ms]"
+              >
                 {movie?.genres.map((genre) => (
                   <div
                     key={genre.id}
-                    className="rounded-3xl px-[2rem] mt-6 mb-4 py-2 text-center font-semibold
+                    className="rounded-3xl px-[1rem] lg:px-[2rem] py-2 text-center font-semibold
                        border-white border-2 bg-[#111]"
                   >
                     {genre?.name}
@@ -127,12 +154,15 @@ function MovieDetail() {
                 ))}
               </div>
               <div className="text-justify mb-4">{movie?.overview}</div>
-              <div className="hidden sm:flex font-semibold text-xl my-2">
+              <div className="block lg:hidden font-semibold text-xl my-2">
                 IMDB: {movie?.vote_average}
               </div>
+
+              {/* Casts */}
+
               <div className="font-semibold text-2xl">Casts</div>
               <div
-                className="row-cast h-[14rem] px-2 py-4 flex gap-3 overflow-x-scroll 
+                className="row-cast h-[15rem] px-2 py-4 flex gap-3 overflow-x-scroll 
               overflow-y-hidden scroll-smooth
               
               "
@@ -163,29 +193,39 @@ function MovieDetail() {
           </div>
 
           {/* Ref Youtube */}
-          <div className="w-[72.5%] mx-auto my-[5rem]">
-            {videoList.splice(0, 3)?.map((video) => (
-              <div key={video.id} className="mb-5">
-                <div className="text-[1.5rem] mb-2 font-bold">
-                  {video?.name || "VID NAME"}
+          {/* w-[90%] md:w-[83%] lg:w-[60%] mx-auto */}
+          {videoList.length > 0 && (
+            <div
+              className="
+            w-full px-[2rem] md:px-[4rem] xl:px-[6.5rem] 2xl:px-[13rem]
+            mt-[2rem] lg:mt-[5rem] duration-100 transition-all delay-[30ms]"
+            >
+              {videoList?.splice(0, 2)?.map((video) => (
+                <div key={video.id} className="mb-10">
+                  <div className="text-[1.5rem] mb-2 font-bold">
+                    {video?.name || "VID NAME"}
+                  </div>
+                  <ReactPlayer
+                    className="shadow-fuchsia-500/50 shadow-lg rounded-lg 
+                    max-h-[18rem] sm:max-h-[22rem] md:max-h-[24rem]
+                     lg:max-h-[30rem] xl:max-h-[34rem] 2xl:max-h-[40rem] 
+                     duration-100 transition-all delay-[30ms]"
+                    controls
+                    url={`https://www.youtube.com/watch?v=${video?.key}`}
+                    muted
+                    width="100%"
+                    height="40rem"
+                  />
                 </div>
-                <ReactPlayer
-                  className="shadow-fuchsia-500/50 shadow-lg rounded-lg"
-                  controls
-                  url={`https://www.youtube.com/watch?v=${video?.key}`}
-                  muted
-                  width="100%"
-                  height="40rem"
-                />
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* Recommendations */}
-          <div className="w-[80%] mx-auto">
+          <div className="w-full px-[2rem] md:px-[4rem] mt-[6rem]">
             <div className="text-[1.75rem] font-bold">Recommendations</div>
             <div
-              className="row-cast py-6 px-7 h-[30rem] flex gap-5 overflow-x-scroll overflow-y-hidden 
+              className="row-cast py-6 px-3 md:px-7 h-[30rem] flex gap-3 md:gap-5 overflow-x-scroll overflow-y-hidden 
             scroll-smooth"
             >
               {recommendedvideoList?.map((item) => (
@@ -211,10 +251,14 @@ function MovieDetail() {
                       "https://picsum.photos/1900 "
                     }
                     alt="fail"
-                    className="h-[20rem] min-w-[14rem] rounded-xl bg-auto 
+                    className="h-[10rem] sm:h-[14rem] md:h-[15rem] xl:h-[20rem] min-w-[8rem] sm:min-w-[10rem]
+                     md:min-w-[11rem] xl:min-w-[14rem]
+                     rounded-xl bg-auto 
                     object-cover bg-center shadow-cyan-500/50 shadow-lg mb-2"
                   />
-                  <div>{item?.title || "Name"}</div>
+                  <div className="text-[0.9rem] sm:text-[0.95rem] md:text-[1rem]">
+                    {item?.title || "Name"}
+                  </div>
                 </div>
               ))}
             </div>

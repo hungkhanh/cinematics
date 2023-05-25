@@ -39,7 +39,7 @@ function Header() {
     <div
       className={`navbar ${
         showNav && "bg-[#080808]"
-      } fixed top-0 w-full z-30 text-white flex justify-between 
+      } fixed top-0 z-30 text-white flex justify-between 
       items-center py-[2.25rem] transition-all ease-in delay-[150ms]`}
     >
       <div className="flex items-center gap-2 fixed z-10 left-9">
