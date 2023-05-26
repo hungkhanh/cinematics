@@ -3,9 +3,11 @@ import { truncateText } from "../../../utils/truncateText";
 import { useEffect, useState } from "react";
 import tmdbApi from "../../../api/tmdbApi";
 import { Link } from "react-router-dom";
+import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
 
-function Banner({}) {
+function MovieBanner({}) {
   const [movie, setMovie] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -14,11 +16,16 @@ function Banner({}) {
         setMovie(
           response?.results[Math.floor(Math.random() * response.results.length)]
         );
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
+
+  if (loading) {
+    return <LoadingModal />;
+  }
 
   return (
     <div
@@ -92,4 +99,4 @@ function Banner({}) {
   );
 }
 
-export default Banner;
+export default MovieBanner;

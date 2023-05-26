@@ -7,12 +7,7 @@ import { Outlet } from "react-router-dom";
 
 export function MainLayout() {
   return (
-    <Box
-      sx={{
-        backgroundColor: "#111",
-        width: "100%",
-      }}
-    >
+    <Box sx={{ backgroundColor: "#111" }}>
       <Header />
       <Outlet />
       <Footer />

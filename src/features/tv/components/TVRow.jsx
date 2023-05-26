@@ -1,17 +1,10 @@
-import { Pagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosTMDB from "../../../api/axiosTMDB";
 import "../../../components/Common/HideScroll/HideScroll.css";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
-import { truncateText } from "../../../utils/truncateText";
 
 function MovieRow({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(null);
 
   // muon render tung hang thi minh nen call truc tiep o day vs params khac nhau de no render cai nao xong
   // trc thi render trc
@@ -19,28 +12,21 @@ function MovieRow({ title, fetchUrl }) {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosTMDB.get(`${fetchUrl}&page=${page}`);
-        setMovies([...movies, ...response?.results]);
-        setTotalPage(response?.total_pages);
-        setLoading(false);
+        const response = await axiosTMDB.get(fetchUrl);
+        setMovies(response?.results);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [page]);
-
-  const handleLoadMore = () => {
-    setPage((page) => page + 1);
-  };
-
-  if (loading) {
-    return <LoadingModal />;
-  }
+  }, []);
 
   return (
     <div className="pb-6 ">
       <div className="text-white text-xl font-bold px-4">{title}</div>
-      <div className="hide-scroll px-7 sm:px-4 py-6 flex flex-wrap gap-6">
+      <div
+        className="hide-scroll px-7 sm:px-4 py-6 flex flex-wrap gap-6 overflow-x-scroll overflow-y-hidden 
+      scroll-smooth"
+      >
         {movies?.map((movie) => (
           <Link
             to={`/movie/${movie?.id}`}
@@ -69,34 +55,38 @@ function MovieRow({ title, fetchUrl }) {
               shadow-lg object-fill"
             />
             <div className="text-white mt-1">
-              {truncateText(
-                `${
-                  movie?.original_title ||
-                  movie?.title ||
-                  movie?.original_name ||
-                  "Name"
-                }
-              `,
-                30
-              )}
+              {`${
+                movie?.original_title ||
+                movie?.title ||
+                movie?.original_name ||
+                "Name"
+              }`}
             </div>
           </Link>
         ))}
-        {!loading && page < totalPage ? (
-          <button
-            className="text-white ml-3 h-[3rem] px-5 font-semibold my-auto 
-          rounded-3xl border-4 border-rose-500
-          hover:-translate-0.5
-          hover:scale-110 duration-100 transition-all delay-[30ms]"
-            onClick={handleLoadMore}
-          >
-            More...
-          </button>
-        ) : (
-          ""
-        )}
       </div>
     </div>
+    // <div className="pb-6 ">
+    //   <div className="text-white text-xl font-bold px-4">{title}</div>
+    //   <div className="px-4 py-6 row-posters flex gap-6 overflow-x-scroll overflow-y-hidden scroll-smooth">
+    //     {movies?.map((movie) => (
+    //       <img
+    //         key={movie?.id}
+    //         src={
+    //           movie &&
+    //           `${
+    //             "https://image.tmdb.org/t/p/original" + movie?.backdrop_path ||
+    //             movie?.poster_path ||
+    //             "https://picsum.photos/1900"
+    //           } `
+    //         }
+    //         alt="dsa"
+    //         className="w-[9rem] h-[12rem] shadow-rose-500/50 rounded-lg shadow-lg hover:cursor-pointer hover:-translate-0.5
+    //          hover:scale-110 duration-100"
+    //       />
+    //     ))}
+    //   </div>
+    // </div>
   );
 }
 

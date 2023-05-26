@@ -1,13 +1,14 @@
 import { Box } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import ReactPlayer from "react-player";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axiosTMDB from "../../../api/axiosTMDB";
-import "../../../components/Common/HideScroll/HideScroll.css";
 import { API_KEY } from "../../../utils/constants";
+import "../../../components/Common/HideScroll/HideScroll.css";
+
+import ReactPlayer from "react-player";
 
 function MovieDetail() {
-  const { movie_id } = useParams();
+  const { tv_id } = useParams();
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
   const [credit, setCredit] = useState(null);
@@ -17,9 +18,7 @@ function MovieDetail() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosTMDB.get(
-          `/movie/${movie_id}?api_key=${API_KEY}`
-        );
+        const response = await axiosTMDB.get(`/tv/${tv_id}?api_key=${API_KEY}`);
         setMovie(response);
       } catch (error) {
         console.log(error);
@@ -29,7 +28,7 @@ function MovieDetail() {
     (async () => {
       try {
         const response = await axiosTMDB.get(
-          `/movie/${movie_id}/credits?api_key=${API_KEY}`
+          `/tv/${tv_id}/credits?api_key=${API_KEY}`
         );
         setCredit(response);
       } catch (error) {
@@ -40,7 +39,7 @@ function MovieDetail() {
     (async () => {
       try {
         const response = await axiosTMDB.get(
-          `/movie/${movie_id}/videos?api_key=${API_KEY}`
+          `/tv/${tv_id}/videos?api_key=${API_KEY}`
         );
         setVideoList(response?.results);
       } catch (error) {
@@ -51,21 +50,21 @@ function MovieDetail() {
     (async () => {
       try {
         const response = await axiosTMDB.get(
-          `/movie/${movie_id}/recommendations?api_key=${API_KEY}`
+          `/tv/${tv_id}/recommendations?api_key=${API_KEY}`
         );
         setRecommendedVideoList(response?.results);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [movie_id]);
+  }, [tv_id]);
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0);
-  }, [movie_id]);
+  }, [tv_id]);
 
   const recommendationsClick = (rcmId) => {
-    navigate(`/movie/${rcmId}`, { top: true });
+    navigate(`/tv/${rcmId}`, { top: true });
   };
 
   const checkHeightForRendering = (list) => {
@@ -225,7 +224,7 @@ function MovieDetail() {
           <div className="w-full px-[2rem] md:px-[4rem] mt-[6rem]">
             <div className="text-[1.75rem] font-bold">Recommendations</div>
             <div
-              className="hide-scroll py-6 px-3 md:px-7 h-[30rem] flex gap-3 md:gap-5 overflow-x-scroll overflow-y-hidden 
+              className="row-cast py-6 px-3 md:px-7 h-[30rem] flex gap-3 md:gap-5 overflow-x-scroll overflow-y-hidden 
             scroll-smooth"
             >
               {recommendedvideoList?.map((item) => (

@@ -62,7 +62,7 @@ function LoginForm({ initialValues, onSubmit, loginResponseData }) {
             Don't have an account? Sign up!
           </Link>
           <Link
-            to="/main"
+            to="/movies"
             className="inline-block text-center w-full mt-7 text-white px-4 py-2 rounded-xl bg-gradient-to-r 
             from-pink-600 to-rose-500 hover:from-rose-500 hover:to-pink-600"
           >

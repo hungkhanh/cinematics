@@ -37,26 +37,30 @@ function Header() {
 
   return (
     <div
-      className={`navbar ${
-        showNav && "bg-[#080808]"
-      } fixed top-0 z-30 text-white flex justify-between 
-      items-center py-[2.25rem] transition-all ease-in delay-[150ms]`}
+      className={`${
+        showNav ? "bg-[#080808]" : ""
+      } fixed top-0 z-50 text-white flex justify-between 
+      items-center py-[2.25rem] transition-all ease-in delay-[150ms] `}
     >
-      <div className="flex items-center gap-2 fixed z-10 left-9">
-        <MovieFilterIcon sx={{ fontSize: "3rem", color: "#e11d48" }} />
-        <Link to="/main" className="text-[1.8rem] font-bold text-rose-700">
+      <div
+        className={`flex items-center gap-2 fixed z-50 left-9 text-[1.9rem] font-bold ${
+          showNav ? "text-rose-600" : "text-rose-700"
+        }`}
+      >
+        <Link to="/movies">
+          <i className="fa-solid fa-clapperboard z-50 mr-2"></i>
           Cinematics
         </Link>
       </div>
       <div
         className="hidden lg:flex lg:gap-5 font-semibold items-center
-       fixed lg:left-[31%] xl:left-[35%] 2xl:left-[39%] z-10 "
+       fixed lg:left-[31%] xl:left-[35%] 2xl:left-[39%] z-50 "
       >
-        <NavLink className={navLinkStyles} to="/main">
-          Home
+        <NavLink className={navLinkStyles} to="/movies">
+          Movies
         </NavLink>
-        <NavLink className={navLinkStyles} to="/tickets">
-          Tickets
+        <NavLink className={navLinkStyles} to="/tv">
+          TV
         </NavLink>
         <NavLink className={navLinkStyles} to="/cinemas">
           Cinemas
@@ -69,7 +73,7 @@ function Header() {
         </NavLink>
       </div>
 
-      <div className="flex font-bold fixed right-9 z-10 ">
+      <div className="flex font-bold fixed right-9 z-50 ">
         {!isLoggedIn ? (
           <div className="flex gap-3">
             <Link

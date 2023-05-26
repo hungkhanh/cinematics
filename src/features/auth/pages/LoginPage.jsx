@@ -16,7 +16,7 @@ function LoginPage() {
 
   useEffect(() => {
     if (loginResponseData) {
-      navigate("/main");
+      navigate("/movies");
     }
   }, [loginResponseData]);
 
