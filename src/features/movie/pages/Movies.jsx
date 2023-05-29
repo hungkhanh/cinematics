@@ -9,7 +9,7 @@ function Movies() {
   return (
     <div>
       <MovieBanner />
-      <div className="mt-8 mx-8">
+      <div className="pt-8 mx-8">
         <MovieRow title="Trending" fetchUrl={requests.fetchTrending} />
         <MovieRow title="Top Rated" fetchUrl={requests.fetchTopRated} />
         <MovieRow title="Action Movies" fetchUrl={requests.fetchActionMovies} />
