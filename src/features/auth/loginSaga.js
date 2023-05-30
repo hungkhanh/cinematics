@@ -11,7 +11,7 @@ function* loginUser(action) {
         if (response) {
             toast("Login successfully!", { autoClose: 500, position: "top-right" });
             yield put(loginSuccess(response?.content))
-            localStorage.setItem('token', response?.content?.accessToken)
+            // localStorage.setItem('token', response?.content?.accessToken)
         }
 
 

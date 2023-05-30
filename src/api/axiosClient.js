@@ -11,12 +11,12 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
     function (config) {
         // Do something before request is sent
-        const token = localStorage.getItem("token");
+        // const token = localStorage.getItem("token");
 
         // token && console.log(JSON.parse(token));
 
-        if (config.headers && token)
-            config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
+        // if (config.headers && token)
+        //     config.headers.Authorization = `Bearer ${JSON.parse(token)}`;
         return config;
     },
     function (error) {

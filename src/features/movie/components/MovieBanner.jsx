@@ -53,7 +53,7 @@ function MovieBanner({}) {
             `${
               "https://image.tmdb.org/t/p/original" + randomElement.poster_path
             }`) ||
-          "https://picsum.photos/1900"
+          "https://image.tmdb.org/t/p/original/b9UCfDzwiWw7mIFsIQR9ZJUeh7q.jpg"
         }
         alt="failImg"
       />
@@ -98,27 +98,27 @@ function MovieBanner({}) {
       ) : (
         <div className="absolute z-20 text-white top-[20%] lg:top-[28%] mx-[3rem]">
           <Skeleton
-            sx={{ bgcolor: "#333" }}
+            sx={{ bgcolor: "#555" }}
             variant="rounded"
             height={130}
             width={800}
           />
           <div className="my-4 flex gap-4">
             <Skeleton
-              sx={{ bgcolor: "#333" }}
+              sx={{ bgcolor: "#555" }}
               variant="rounded"
               height={45}
               width={85}
             />
             <Skeleton
-              sx={{ bgcolor: "#333" }}
+              sx={{ bgcolor: "#555" }}
               variant="rounded"
               height={45}
               width={85}
             />
           </div>
           <Skeleton
-            sx={{ bgcolor: "#333" }}
+            sx={{ bgcolor: "#555" }}
             variant="rounded"
             height={100}
             width={600}
