@@ -3,9 +3,9 @@ import MovieFilterIcon from "@mui/icons-material/MovieFilter";
 import { gradientAnimation } from "../../../utils/gradientAnimation";
 import { Link, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logOut } from "../../../features/auth/loginSlice";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import "./Header.css";
+import { logout } from "../../../features/auth/authSlice";
 
 function Header() {
   const navLinkStyles = ({ isActive }) => {
@@ -30,7 +30,7 @@ function Header() {
   const dispatch = useDispatch();
   const isLoggedIn = Boolean(localStorage.getItem("token"));
   const handleLogoutClick = () => {
-    dispatch(logOut());
+    dispatch(logout());
     localStorage.removeItem("token");
     return;
   };
@@ -47,7 +47,15 @@ function Header() {
           showNav ? "text-rose-600" : "text-rose-700"
         }`}
       >
-        <Link to="/movies">
+        <Link
+          to="/movies"
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
           <i className="fa-solid fa-clapperboard z-50 mr-2"></i>
           Cinematics
         </Link>
@@ -56,10 +64,28 @@ function Header() {
         className="hidden lg:flex lg:gap-5 font-semibold items-center
        fixed lg:left-[31%] xl:left-[35%] 2xl:left-[39%] z-50 "
       >
-        <NavLink className={navLinkStyles} to="/movies">
+        <NavLink
+          className={navLinkStyles}
+          to="/movies"
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
           Movies
         </NavLink>
-        <NavLink className={navLinkStyles} to="/tv">
+        <NavLink
+          className={navLinkStyles}
+          to="/tv"
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
           TV
         </NavLink>
         <NavLink className={navLinkStyles} to="/cinemas">

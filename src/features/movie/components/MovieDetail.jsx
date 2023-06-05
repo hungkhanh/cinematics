@@ -61,7 +61,10 @@ function MovieDetail() {
   }, [movie_id]);
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }, [movie_id]);
 
   const recommendationsClick = (rcmId) => {
@@ -147,7 +150,9 @@ function MovieDetail() {
                   <div
                     key={genre.id}
                     className="rounded-3xl px-[1rem] lg:px-[2rem] py-2 text-center font-semibold
-                       border-white border-2 bg-[#111]"
+                       border-white border-2 bg-[#111] hover:text-amber-500 hover:border-amber-500
+                       hover:shadow-amber-500/50 shadow-lg hover:-translate-0.5 hover:scale-110 duration-100 
+                       transition-all delay-[30ms] hover:cursor-pointer"
                   >
                     {genre?.name}
                   </div>

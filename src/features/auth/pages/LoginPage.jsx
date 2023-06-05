@@ -1,32 +1,30 @@
+import { Box } from "@mui/material";
 import React, { useEffect } from "react";
-import LoginForm from "../components/LoginForm";
-import { Box, keyframes } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginStart } from "../loginSlice";
+import { useNavigate } from "react-router-dom";
 import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
 import { gradientAnimation } from "../../../utils";
+import { login } from "../authSlice";
+import LoginForm from "../components/LoginForm";
 
 function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loginResponseData, loginLoading } = useSelector(
-    (state) => state.login
-  );
+  const { user, loading, errorMsg } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (loginResponseData) {
+    if (user) {
       navigate("/movies");
     }
-  }, [loginResponseData]);
+  }, [user]);
 
   const initialValues = {
-    taiKhoan: "",
-    matKhau: "",
+    email: "",
+    password: "",
   };
 
   const handleLogin = (formValues) => {
-    dispatch(loginStart(formValues));
+    dispatch(login(formValues));
     return;
   };
   return (
@@ -44,9 +42,9 @@ function LoginPage() {
       <LoginForm
         initialValues={initialValues}
         onSubmit={handleLogin}
-        loginResponseData={loginResponseData}
+        user={user}
       />
-      {loginLoading && <LoadingModal />}
+      {loading && <LoadingModal />}
     </Box>
   );
 }

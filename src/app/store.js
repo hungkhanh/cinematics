@@ -5,12 +5,12 @@ import registerReducer from '../features/auth/registerSlice'
 import rootSaga from './rootSaga'
 import bannerReducer from '../features/movie/bannerSlice'
 import movieReudcer from '../features/movie/movieSlice'
+import authReducer from '../features/auth/authSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({
-    register: registerReducer,
-    login: loginReducer,
+    auth: authReducer,
     banner: bannerReducer,
     movie: movieReudcer,
 })

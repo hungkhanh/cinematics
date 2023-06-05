@@ -1,37 +1,27 @@
+import { Box } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import RegisterForm from "../components/RegisterForm";
-import { registerStart } from "../registerSlice";
-import { Box } from "@mui/material";
 import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
 import { gradientAnimation } from "../../../utils";
+import { register, login } from "../authSlice";
+import RegisterForm from "../components/RegisterForm";
 
 function RegisterPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { regResponseData, regLoading } = useSelector(
-    (state) => state.register
-  );
-
-  useEffect(() => {
-    if (regResponseData) {
-      navigate("/login");
-    }
-  }, [regResponseData]);
+  const { loading, user, errorMsg } = useSelector((state) => state.auth);
 
   const initialValues = {
-    taiKhoan: "",
-    matKhau: "",
     email: "",
-    soDt: "",
-    maNhom: "",
-    hoTen: "",
+    password: "",
   };
 
   const handleRegister = (formValues) => {
-    dispatch(registerStart(formValues));
+    dispatch(register(formValues));
+    if (!errorMsg) {
+      navigate("/login");
+    }
     return;
   };
 
@@ -50,9 +40,9 @@ function RegisterPage() {
       <RegisterForm
         initialValues={initialValues}
         onSubmit={handleRegister}
-        regResponseData={regResponseData}
+        user={user}
       />
-      {regLoading && <LoadingModal />}
+      {loading && <LoadingModal />}
     </Box>
   );
 }

@@ -7,15 +7,11 @@ import { InputField } from "../../../components/Common/FormFields";
 import { Link } from "react-router-dom";
 
 const schema = yup.object().shape({
-  taiKhoan: yup.string().required("Please fill this"),
-  matKhau: yup.string().required("Please fill this"),
   email: yup.string().required("Please fill this"),
-  soDt: yup.string().required("Please fill this"),
-  maNhom: yup.string().required("Please fill this"),
-  hoTen: yup.string().required("Please fill this"),
+  password: yup.string().required("Please fill this"),
 });
 
-function RegisterForm({ initialValues, onSubmit, regResponseData }) {
+function RegisterForm({ initialValues, onSubmit, user }) {
   const [error, setError] = useState("");
   const { control, handleSubmit, reset } = useForm({
     defaultValues: initialValues,
@@ -24,15 +20,29 @@ function RegisterForm({ initialValues, onSubmit, regResponseData }) {
 
   const handleFormSubmit = async (formValues) => {
     try {
-      setError("");
-      await onSubmit?.(formValues);
-      if (regResponseData) {
-        reset();
-      }
+      // setError("");
+      await onSubmit(formValues);
+      // if (user) {
+      //   reset();
+      // }
     } catch (error) {
       setError(error.message);
     }
   };
+  // const handleFormSubmit = async (formValues) => {
+  //   try {
+  //     setError("");
+  //     await auth.createUserWithEmailAndPassword(email, password);
+  //     // Send email verification
+  //     await auth.currentUser.sendEmailVerification();
+  //     console.log("Email verification sent");
+  //     if (regResponseData) {
+  //       reset();
+  //     }
+  //   } catch (error) {
+  //     setError(error.message);
+  //   }
+  // };
   return (
     <Box
       minWidth={400}
@@ -57,17 +67,14 @@ function RegisterForm({ initialValues, onSubmit, regResponseData }) {
         <div className="text-[#0b847a] text-[3rem] font-semibold text-center">
           ReGistrA
         </div>
-        <div className="flex gap-[1.5rem]">
-          <div>
-            <InputField name="taiKhoan" control={control} label="Account" />
-            <InputField name="email" control={control} label="Email" />
-            <InputField name="hoTen" control={control} label="Name" />
-          </div>
-          <div>
-            <InputField name="matKhau" control={control} label="Password" />
-            <InputField name="soDt" control={control} label="Phone Number" />
-            <InputField name="maNhom" control={control} label="Group Name" />
-          </div>
+        <div className="gap-[1.5rem]">
+          <InputField name="email" control={control} label="Email" />
+          <InputField
+            type="password"
+            name="password"
+            control={control}
+            label="Password"
+          />
         </div>
 
         <Box sx={{ marginTop: "1.5rem" }}>

@@ -8,11 +8,11 @@ import { Link } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const schema = yup.object().shape({
-  taiKhoan: yup.string().required("Please fill this"),
-  matKhau: yup.string().required("Please fill this"),
+  email: yup.string().required("Please fill this"),
+  password: yup.string().required("Please fill this"),
 });
 
-function LoginForm({ initialValues, onSubmit, loginResponseData }) {
+function LoginForm({ initialValues, onSubmit, user }) {
   const [error, setError] = useState("");
   const { control, handleSubmit, reset } = useForm({
     defaultValues: initialValues,
@@ -21,11 +21,11 @@ function LoginForm({ initialValues, onSubmit, loginResponseData }) {
 
   const handleFormSubmit = async (formValues) => {
     try {
-      setError("");
-      await onSubmit?.(formValues);
-      if (loginResponseData) {
-        reset();
-      }
+      // setError("");
+      await onSubmit(formValues);
+      // if (user) {
+      //   reset();
+      // }
     } catch (error) {
       setError(error.message);
     }
@@ -48,8 +48,13 @@ function LoginForm({ initialValues, onSubmit, loginResponseData }) {
         <div className="text-[#0b847a] text-[3rem] font-semibold text-center">
           PORTAL
         </div>
-        <InputField name="taiKhoan" control={control} label="Account" />
-        <InputField name="matKhau" control={control} label="Password" />
+        <InputField name="email" control={control} label="Email" />
+        <InputField
+          type="password"
+          name="password"
+          control={control}
+          label="Password"
+        />
 
         <Box sx={{ marginTop: "1.5rem" }}>
           <button className="font-semibold mb-[0.8rem] bg-[#0b847a] hover:bg-[#0f9489] w-full rounded-md p-3 text-white text-xl">
