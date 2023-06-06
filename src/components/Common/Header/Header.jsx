@@ -39,7 +39,7 @@ function Header() {
     <div
       className={`${
         showNav ? "bg-[#080808]" : ""
-      } fixed top-0 z-50 text-white flex justify-between 
+      } w-full fixed top-0 z-50 text-white flex justify-between 
       items-center py-[2.25rem] transition-all ease-in delay-[150ms] `}
     >
       <div
@@ -123,7 +123,8 @@ function Header() {
         ) : (
           <Link
             to="/login"
-            className="bg-white text-black py-2 px-4 rounded-2xl "
+            className="bg-white text-black py-2 px-4 rounded-2xl 
+            ease-in-out hover:-translate-0.5 hover:scale-110 duration-100 hover:bg-red-700 hover:text-white"
             onClick={handleLogoutClick}
           >
             Logout

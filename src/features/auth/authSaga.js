@@ -46,13 +46,12 @@ function* registerSaga({ payload }) {
     try {
         const { email, password } = payload;
         yield call(() => createUserWithEmailAndPassword(auth, email, password));
-        toast("Register account successfully, pls check your inbox to verify your email!", { autoClose: 800 });
+        toast("Register account successfully, pls check your inbox to verify your email!", { autoClose: 1000 });
         sendEmailVerification(auth.currentUser)
-        signOut(auth)
+        // signOut(auth)
     } catch (error) {
         toast(error.message, { autoClose: 1000 });
         yield put(setError(error.message))
-
     }
     yield put(stopLoading())
 }

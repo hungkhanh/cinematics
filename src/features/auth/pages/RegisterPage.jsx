@@ -1,13 +1,15 @@
 import { Box } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
 import { gradientAnimation } from "../../../utils";
 import { register, login } from "../authSlice";
 import RegisterForm from "../components/RegisterForm";
-
+import { auth } from "../../../firebase";
+import { signOut } from "firebase/auth";
 function RegisterPage() {
+  signOut(auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { loading, user, errorMsg } = useSelector((state) => state.auth);
@@ -17,11 +19,15 @@ function RegisterPage() {
     password: "",
   };
 
-  const handleRegister = (formValues) => {
-    dispatch(register(formValues));
-    if (!errorMsg) {
+  const currentUser = auth.currentUser;
+  useEffect(() => {
+    if (currentUser) {
       navigate("/login");
     }
+  }, [currentUser]);
+
+  const handleRegister = (formValues) => {
+    dispatch(register(formValues));
     return;
   };
 
