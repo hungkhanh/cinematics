@@ -1,15 +1,15 @@
 import React from "react";
 import { requests } from "../../../utils/constants";
 import TVRow from "../components/TVRow";
-import MovieBanner from "../../movie/components/MovieBanner";
+import TVBanner from "../components/TVBanner";
 
 function Movies() {
   //muon render dong thoi song song thi call o day roi nhet vao 1 mang chung roi pass prop
 
   return (
     <div>
-      <MovieBanner />
-      <div className="mt-8 mx-8">
+      <TVBanner />
+      <div className="pt-8 mx-8">
         <TVRow title="News" fetchUrl={requests.fetchNewsTV} />
         <TVRow title="Family" fetchUrl={requests.fetchFamilyTV} />
         <TVRow title="Kids" fetchUrl={requests.fetchKidsTV} />

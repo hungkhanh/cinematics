@@ -1,10 +1,18 @@
+import { Pagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosTMDB from "../../../api/axiosTMDB";
 import "../../../components/Common/HideScroll/HideScroll.css";
+import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
+import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
+import { truncateText } from "../../../utils/truncateText";
+import Skeleton from "@mui/material/Skeleton";
 
-function MovieRow({ title, fetchUrl }) {
-  const [movies, setMovies] = useState([]);
+function TVRow({ title, fetchUrl }) {
+  const [TVs, setTVs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(null);
 
   // muon render tung hang thi minh nen call truc tiep o day vs params khac nhau de no render cai nao xong
   // trc thi render trc
@@ -12,82 +20,93 @@ function MovieRow({ title, fetchUrl }) {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosTMDB.get(fetchUrl);
-        setMovies(response?.results);
+        const response = await axiosTMDB.get(`${fetchUrl}&page=${page}`);
+        setTVs([...TVs, ...response?.results]);
+        setTotalPage(response?.total_pages);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, []);
+  }, [page]);
+
+  const handleLoadMore = () => {
+    setPage((page) => page + 1);
+    setLoading(true);
+  };
 
   return (
     <div className="pb-6 ">
-      <div className="text-white text-xl font-bold px-4">{title}</div>
-      <div
-        className="hide-scroll px-7 sm:px-4 py-6 flex flex-wrap gap-6 overflow-x-scroll overflow-y-hidden 
-      scroll-smooth"
-      >
-        {movies?.map((movie) => (
-          <Link
-            to={`/movie/${movie?.id}`}
-            className="hover:cursor-pointer hover:-translate-0.5
+      <div className="text-white text-xl font-bold px-4">
+        {!loading ? (
+          title
+        ) : (
+          <div>
+            <Skeleton sx={{ bgcolor: "#333" }} variant="rounded" height={100} />
+            <Skeleton sx={{ bgcolor: "#333" }} variant="text" />
+          </div>
+        )}
+      </div>
+      <div className="hide-scroll px-7 sm:px-4 py-6 flex flex-wrap gap-6">
+        {TVs &&
+          TVs?.map((tv) => (
+            <Link
+              to={`/tv/${tv?.id}`}
+              className="hover:cursor-pointer hover:-translate-0.5
           hover:scale-110 duration-100 transition-all delay-[30ms] 
           2xl:w-[15.2%] xl:w-[18.3%] lg:w-[23%] md:w-[30.8%] sm:w-[47%] w-full"
-            key={movie?.id}
-          >
-            <img
-              src={
-                (movie &&
-                  ((movie?.backdrop_path &&
-                    `${
-                      "https://image.tmdb.org/t/p/original" +
-                      movie.backdrop_path
-                    }`) ||
-                    (movie?.poster_path &&
+              key={tv?.id}
+            >
+              <img
+                src={
+                  (tv &&
+                    ((tv?.backdrop_path &&
                       `${
-                        "https://image.tmdb.org/t/p/original" +
-                        movie.poster_path
-                      }`))) ||
-                "https://picsum.photos/1900"
-              }
-              alt="dsa"
-              className="w-full h-[16rem] sm:h-[11rem] md:h-[9rem] shadow-rose-500/50 rounded-lg 
+                        "https://image.tmdb.org/t/p/original" + tv.backdrop_path
+                      }`) ||
+                      (tv?.poster_path &&
+                        `${
+                          "https://image.tmdb.org/t/p/original" + tv.poster_path
+                        }`))) ||
+                  "https://picsum.photos/1900"
+                }
+                alt={`${
+                  tv?.original_title || tv?.title || tv?.original_name || "Name"
+                }`}
+                className="w-full h-[16rem] sm:h-[11rem] md:h-[9rem] shadow-rose-500/50 rounded-lg 
               shadow-lg object-fill"
-            />
-            <div className="text-white mt-1">
-              {`${
-                movie?.original_title ||
-                movie?.title ||
-                movie?.original_name ||
-                "Name"
-              }`}
-            </div>
-          </Link>
-        ))}
+              />
+
+              <div className="text-white mt-1">
+                {truncateText(
+                  `${
+                    tv?.original_title ||
+                    tv?.title ||
+                    tv?.original_name ||
+                    "Name"
+                  }
+              `,
+                  30
+                )}
+              </div>
+            </Link>
+          ))}
+        {!loading && page < totalPage ? (
+          <button
+            className="text-amber-200 ml-3 h-[3rem] px-5 font-semibold my-auto 
+          rounded-3xl border-4 border-amber-500 shadow-amber-500/50 shadow-lg
+          hover:-translate-0.5
+          hover:scale-110 duration-100 transition-all delay-[30ms]"
+            onClick={handleLoadMore}
+          >
+            More...
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
-    // <div className="pb-6 ">
-    //   <div className="text-white text-xl font-bold px-4">{title}</div>
-    //   <div className="px-4 py-6 row-posters flex gap-6 overflow-x-scroll overflow-y-hidden scroll-smooth">
-    //     {movies?.map((movie) => (
-    //       <img
-    //         key={movie?.id}
-    //         src={
-    //           movie &&
-    //           `${
-    //             "https://image.tmdb.org/t/p/original" + movie?.backdrop_path ||
-    //             movie?.poster_path ||
-    //             "https://picsum.photos/1900"
-    //           } `
-    //         }
-    //         alt="dsa"
-    //         className="w-[9rem] h-[12rem] shadow-rose-500/50 rounded-lg shadow-lg hover:cursor-pointer hover:-translate-0.5
-    //          hover:scale-110 duration-100"
-    //       />
-    //     ))}
-    //   </div>
-    // </div>
   );
 }
 
-export default MovieRow;
+export default TVRow;

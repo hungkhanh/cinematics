@@ -10,6 +10,10 @@ const tmdbApi = {
         const url = `/movie`
         return axiosTMDB.get(url)
     },
+    getTVBanner() {
+        const url = requests.fetchMysteryTV
+        return axiosTMDB.get(url)
+    }
 
 };
 

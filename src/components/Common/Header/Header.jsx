@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import MovieFilterIcon from "@mui/icons-material/MovieFilter";
-import { gradientAnimation } from "../../../utils/gradientAnimation";
-import { Link, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import "./Header.css";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
 import { logout } from "../../../features/auth/authSlice";
+import "./Header.css";
 
 function Header() {
   const navLinkStyles = ({ isActive }) => {

@@ -72,7 +72,12 @@ function MovieRow({ title, fetchUrl }) {
                         }`))) ||
                   "https://picsum.photos/1900"
                 }
-                alt="dsa"
+                alt={`${
+                  movie?.original_title ||
+                  movie?.title ||
+                  movie?.original_name ||
+                  "Name"
+                }`}
                 className="w-full h-[16rem] sm:h-[11rem] md:h-[9rem] shadow-rose-500/50 rounded-lg 
               shadow-lg object-fill"
               />

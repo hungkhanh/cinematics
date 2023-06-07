@@ -1,16 +1,15 @@
 import { Box } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import axiosTMDB from "../../../api/axiosTMDB";
-import { API_KEY } from "../../../utils/constants";
-import "../../../components/Common/HideScroll/HideScroll.css";
-
 import ReactPlayer from "react-player";
+import { useNavigate, useParams } from "react-router-dom";
+import axiosTMDB from "../../../api/axiosTMDB";
+import "../../../components/Common/HideScroll/HideScroll.css";
+import { API_KEY } from "../../../utils/constants";
 
-function MovieDetail() {
-  const { tv_id } = useParams();
+function TVDetail() {
+  const { TV_id } = useParams();
   const navigate = useNavigate();
-  const [movie, setMovie] = useState(null);
+  const [tv, setTV] = useState(null);
   const [credit, setCredit] = useState(null);
   const [videoList, setVideoList] = useState([]);
   const [recommendedvideoList, setRecommendedVideoList] = useState([]);
@@ -18,8 +17,9 @@ function MovieDetail() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await axiosTMDB.get(`/tv/${tv_id}?api_key=${API_KEY}`);
-        setMovie(response);
+        const response = await axiosTMDB.get(`/tv/${TV_id}?api_key=${API_KEY}`);
+        setTV(response);
+        console.log(response);
       } catch (error) {
         console.log(error);
       }
@@ -28,7 +28,7 @@ function MovieDetail() {
     (async () => {
       try {
         const response = await axiosTMDB.get(
-          `/tv/${tv_id}/credits?api_key=${API_KEY}`
+          `/tv/${TV_id}/credits?api_key=${API_KEY}`
         );
         setCredit(response);
       } catch (error) {
@@ -39,7 +39,7 @@ function MovieDetail() {
     (async () => {
       try {
         const response = await axiosTMDB.get(
-          `/tv/${tv_id}/videos?api_key=${API_KEY}`
+          `/tv/${TV_id}/videos?api_key=${API_KEY}`
         );
         setVideoList(response?.results);
       } catch (error) {
@@ -50,18 +50,21 @@ function MovieDetail() {
     (async () => {
       try {
         const response = await axiosTMDB.get(
-          `/tv/${tv_id}/recommendations?api_key=${API_KEY}`
+          `/tv/${TV_id}/recommendations?api_key=${API_KEY}`
         );
         setRecommendedVideoList(response?.results);
       } catch (error) {
         console.log(error);
       }
     })();
-  }, [tv_id]);
+  }, [TV_id]);
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-  }, [tv_id]);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [TV_id]);
 
   const recommendationsClick = (rcmId) => {
     navigate(`/tv/${rcmId}`, { top: true });
@@ -109,23 +112,21 @@ function MovieDetail() {
                 className="h-full w-full bg-auto object-cover bg-center shadow-rose-500/50 rounded-3xl 
                   shadow-lg"
                 src={
-                  (movie &&
-                    ((movie?.backdrop_path &&
+                  (tv &&
+                    ((tv?.backdrop_path &&
                       `${
-                        "https://image.tmdb.org/t/p/original" +
-                        movie.backdrop_path
+                        "https://image.tmdb.org/t/p/original" + tv.backdrop_path
                       }`) ||
-                      (movie?.poster_path &&
+                      (tv?.poster_path &&
                         `${
-                          "https://image.tmdb.org/t/p/original" +
-                          movie.poster_path
+                          "https://image.tmdb.org/t/p/original" + tv.poster_path
                         }`))) ||
                   "https://picsum.photos/1900"
                 }
                 alt="failImg"
               />
               <div className="flex font-semibold text-xl mt-4">
-                IMDB: {movie?.vote_average}
+                IMDB: {tv?.vote_average}
               </div>
             </div>
 
@@ -135,26 +136,31 @@ function MovieDetail() {
                 className="text-[4rem] sm:text-[4.2rem] md:text-[4.4rem] lg:text-[4.5rem] xl:text-[4.6rem]
                font-bold w-full leading-[5rem] duration-100 transition-all delay-[30ms]"
               >
-                {movie?.original_title || movie?.title}
+                {tv?.original_name ||
+                  tv?.name ||
+                  tv?.original_title ||
+                  tv?.title}
               </div>
 
               <div
                 className="text-[0.9rem] sm:text-[0.95rem] md:text-[1rem] flex flex-wrap 2xl:flex-nowrap gap-3
                items-center my-4 duration-100 transition-all delay-[30ms]"
               >
-                {movie?.genres.map((genre) => (
+                {tv?.genres.map((genre) => (
                   <div
                     key={genre.id}
                     className="rounded-3xl px-[1rem] lg:px-[2rem] py-2 text-center font-semibold
-                       border-white border-2 bg-[#111]"
+                       border-white border-2 bg-[#111] hover:text-amber-500 hover:border-amber-500
+                       hover:shadow-amber-500/50 shadow-lg hover:-translate-0.5 hover:scale-110 duration-100 
+                       transition-all delay-[30ms] hover:cursor-pointer"
                   >
                     {genre?.name}
                   </div>
                 ))}
               </div>
-              <div className="text-justify mb-4">{movie?.overview}</div>
+              <div className="text-justify mb-4">{tv?.overview}</div>
               <div className="block lg:hidden font-semibold text-xl my-2">
-                IMDB: {movie?.vote_average}
+                IMDB: {tv?.vote_average}
               </div>
 
               {/* Casts */}
@@ -224,7 +230,7 @@ function MovieDetail() {
           <div className="w-full px-[2rem] md:px-[4rem] mt-[6rem]">
             <div className="text-[1.75rem] font-bold">Recommendations</div>
             <div
-              className="row-cast py-6 px-3 md:px-7 h-[30rem] flex gap-3 md:gap-5 overflow-x-scroll overflow-y-hidden 
+              className="hide-scroll py-6 px-3 md:px-7 h-[30rem] flex gap-3 md:gap-5 overflow-x-scroll overflow-y-hidden 
             scroll-smooth"
             >
               {recommendedvideoList?.map((item) => (
@@ -279,4 +285,4 @@ function MovieDetail() {
   );
 }
 
-export default MovieDetail;
+export default TVDetail;
