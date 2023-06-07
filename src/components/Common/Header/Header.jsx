@@ -86,8 +86,8 @@ function Header() {
         >
           TV
         </NavLink>
-        <NavLink className={navLinkStyles} to="/cinemas">
-          Cinemas
+        <NavLink className={navLinkStyles} to="/search_page">
+          Search
         </NavLink>
         <NavLink className={navLinkStyles} to="/news">
           News

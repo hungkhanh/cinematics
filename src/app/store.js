@@ -1,16 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import authReducer from '../features/auth/authSlice'
-import bannerReducer from '../features/movie/bannerSlice'
-import movieReudcer from '../features/movie/movieSlice'
 import rootSaga from './rootSaga'
+import searchReducer from '../features/search/searchSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 
 const rootReducer = combineReducers({
-    auth: authReducer,
-    banner: bannerReducer,
-    movie: movieReudcer,
+    auth: authReducer, search: searchReducer
 })
 
 export const store = configureStore({

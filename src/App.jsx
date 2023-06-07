@@ -8,6 +8,7 @@ import Movies from "./features/movie/pages/Movies";
 import TV from "./features/tv/pages/TV";
 import TestFb from "./components/testFb";
 import TVDetail from "./features/tv/components/TVDetail";
+import SearchPage from "./features/search/pages/SearchPage";
 
 function App() {
   const navigate = useNavigate();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/movie/:movie_id" element={<MovieDetail />} />
         <Route path="/tv" element={<TV />} />
         <Route path="/tv/:TV_id" element={<TVDetail />} />
+        <Route path="/search_page" element={<SearchPage />} />
       </Route>
     </Routes>
   );

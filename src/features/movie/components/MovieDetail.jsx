@@ -98,7 +98,7 @@ function MovieDetail() {
           height="100%"
           url={`https://www.youtube.com/watch?v=${
             videoList[Math.floor(Math.random() * videoList.length)]?.key ||
-            "4Sfu5eAQ5sk"
+            "b9EkMc79ZSU"
           }`}
           playing
           muted

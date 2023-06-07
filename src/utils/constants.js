@@ -18,5 +18,6 @@ export const requests = {
     fetchMysteryTV: `/discover/tv?api_key=${API_KEY}&with_genres=9648`,
     fetchRealityTV: `/discover/tv?api_key=${API_KEY}&with_genres=10764`,
     fetchTalkTV: `/discover/tv?api_key=${API_KEY}&with_genres=10767`,
+    searchMovies: `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}`
 }
 

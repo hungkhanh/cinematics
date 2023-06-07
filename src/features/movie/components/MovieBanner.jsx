@@ -13,7 +13,7 @@ function MovieBanner({}) {
   useEffect(() => {
     (async () => {
       try {
-        const response = await tmdbApi.getBanner();
+        const response = await tmdbApi.getMovieBanner();
         setMovie(response.results);
         setLoading(false);
       } catch (error) {
