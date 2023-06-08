@@ -1,14 +1,14 @@
 import { Pagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axiosTMDB from "../../../api/axiosTMDB";
-import "../../../components/Common/HideScroll/HideScroll.css";
+import axiosTMDB from "../../../../api/axiosTMDB";
+import "../../../../components/Common/HideScroll/HideScroll.css";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
-import { truncateText } from "../../../utils/truncateText";
+import LoadingModal from "../../../../components/Common/LoadingModal/LoadingModal";
+import { truncateText } from "../../../../utils/truncateText";
 import Skeleton from "@mui/material/Skeleton";
 
-function MovieRow({ title, fetchUrl }) {
+function MoviesRow({ title, fetchUrl }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -114,4 +114,4 @@ function MovieRow({ title, fetchUrl }) {
   );
 }
 
-export default MovieRow;
+export default MoviesRow;

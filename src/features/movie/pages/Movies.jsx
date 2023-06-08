@@ -1,38 +1,47 @@
 import React from "react";
 import { requests } from "../../../utils/constants";
-import MovieBanner from "../components/MovieBanner";
-import MovieRow from "../components/MovieRow";
+import MoviesBanner from "../components/Movies/MoviesBanner";
+import MoviesRow from "../components/Movies/MoviesRow";
 
 function Movies() {
   //muon render dong thoi song song thi call o day roi nhet vao 1 mang chung roi pass prop
 
   return (
     <div>
-      <MovieBanner />
+      <MoviesBanner />
       <div className="pt-8 mx-8">
-        <MovieRow title="Trending" fetchUrl={requests.fetchTrending} />
-        <MovieRow title="Top Rated" fetchUrl={requests.fetchTopRated} />
-        <MovieRow title="Action Movies" fetchUrl={requests.fetchActionMovies} />
-        <MovieRow
+        <MoviesRow title="Trending" fetchUrl={requests.fetchTrending} />
+        <MoviesRow title="Top Rated" fetchUrl={requests.fetchTopRated} />
+        <MoviesRow
+          title="Action Movies"
+          fetchUrl={requests.fetchActionMovies}
+        />
+        <MoviesRow
           title="Adventure Movies"
           fetchUrl={requests.fetchAdventureMovies}
         />
-        <MovieRow
+        <MoviesRow
           title="Animation Movies"
           fetchUrl={requests.fetchAnimationMovies}
         />
-        <MovieRow title="Crime Movies" fetchUrl={requests.fetchCrimeMovies} />
-        <MovieRow title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
-        <MovieRow title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
-        <MovieRow
+        <MoviesRow title="Crime Movies" fetchUrl={requests.fetchCrimeMovies} />
+        <MoviesRow
+          title="Horror Movies"
+          fetchUrl={requests.fetchHorrorMovies}
+        />
+        <MoviesRow
+          title="Comedy Movies"
+          fetchUrl={requests.fetchComedyMovies}
+        />
+        <MoviesRow
           title="Fantasy Movies"
           fetchUrl={requests.fetchFantasyMovies}
         />
-        <MovieRow
+        <MoviesRow
           title="Romance Movies"
           fetchUrl={requests.fetchRomanceMovies}
         />
-        <MovieRow
+        <MoviesRow
           title="Documentary Movies"
           fetchUrl={requests.fetchDocumentaryMovies}
         />

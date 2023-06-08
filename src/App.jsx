@@ -3,12 +3,12 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { MainLayout } from "./components/Layout";
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
-import MovieDetail from "./features/movie/components/MovieDetail";
 import Movies from "./features/movie/pages/Movies";
 import TV from "./features/tv/pages/TV";
 import TestFb from "./components/testFb";
 import TVDetail from "./features/tv/components/TVDetail";
 import SearchPage from "./features/search/pages/SearchPage";
+import MovieDetail from "./features/movie/pages/MovieDetail";
 
 function App() {
   const navigate = useNavigate();

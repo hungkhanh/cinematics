@@ -1,11 +1,11 @@
 import { Box, Skeleton } from "@mui/material";
-import { truncateText } from "../../../utils/truncateText";
+import { truncateText } from "../../../../utils/truncateText";
 import { useEffect, useState } from "react";
-import tmdbApi from "../../../api/tmdbApi";
+import tmdbApi from "../../../../api/tmdbApi";
 import { Link } from "react-router-dom";
-import LoadingModal from "../../../components/Common/LoadingModal/LoadingModal";
+import LoadingModal from "../../../../components/Common/LoadingModal/LoadingModal";
 
-function MovieBanner({}) {
+function MoviesBanner({}) {
   const [movie, setMovie] = useState([]);
   const [loading, setLoading] = useState(true);
   const [randomElement, setRandomElement] = useState(null);
@@ -140,4 +140,4 @@ function MovieBanner({}) {
   );
 }
 
-export default MovieBanner;
+export default MoviesBanner;

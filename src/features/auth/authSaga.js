@@ -31,11 +31,13 @@ function* loginSaga({ payload }) {
             };
             yield put(setUser(userInfo));
             localStorage.setItem("token", JSON.stringify(token));
+            toast("Logged in successfully!", { autoClose: 2000 });
+
         } else {
-            toast("Please verify your email first!", { autoClose: 800 });
+            toast("Please verify your email first!", { autoClose: 2000 });
         }
     } catch (error) {
-        toast(error.message, { autoClose: 800 });
+        toast(error.message, { autoClose: 2000 });
         yield put(setError(error.message))
     }
     yield put(stopLoading())
@@ -46,11 +48,11 @@ function* registerSaga({ payload }) {
     try {
         const { email, password } = payload;
         yield call(() => createUserWithEmailAndPassword(auth, email, password));
-        toast("Register account successfully, pls check your inbox to verify your email!", { autoClose: 1000 });
+        toast("Register account successfully, pls check your inbox to verify your email!", { autoClose: 2000 });
         sendEmailVerification(auth.currentUser)
         // signOut(auth)
     } catch (error) {
-        toast(error.message, { autoClose: 1000 });
+        toast(error.message, { autoClose: 2000 });
         yield put(setError(error.message))
     }
     yield put(stopLoading())
@@ -58,6 +60,7 @@ function* registerSaga({ payload }) {
 
 function* logoutSaga() {
     try {
+        toast('Logged out successfully!', { autoClose: 2000 });
         yield call(signOut(auth))
         yield put(logout())
         localStorage.removeItem('token')

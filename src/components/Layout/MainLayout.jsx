@@ -9,7 +9,9 @@ export function MainLayout() {
   return (
     <Box sx={{ backgroundColor: "#111" }}>
       <Header />
-      <Outlet />
+      <div className="min-h-[500rem]">
+        <Outlet />
+      </div>
       <Footer />
     </Box>
   );
