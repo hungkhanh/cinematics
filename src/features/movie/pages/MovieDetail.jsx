@@ -9,6 +9,7 @@ import MovieDetailRecommendations from "../components/MovieDetail/MovieDetailRec
 import MovieDetailReviews from "../components/MovieDetail/MovieDetailReviews";
 import MovieDetailVideoBackground from "../components/MovieDetail/MovieDetailVideoBackground";
 import MovieDetailRefYT from "../components/MovieDetail/MovieDetailRefYT";
+import Footer from "../../../components/Common/Footer/Footer";
 
 function MovieDetail() {
   const { movie_id } = useParams();
@@ -102,9 +103,17 @@ function MovieDetail() {
       className={checkHeightForRendering(videoList?.splice(0, 2))}
       style={{ textShadow: "1px 1px #333" }}
     >
-      <div className="h-[70rem] relative w-full ">
+      {/* <div className="h-[70rem] relative w-full "> */}
+      <div>
         <MovieDetailVideoBackground videoList={videoList} />
-        <div className="absolute w-full text-white z-10 mt-[8rem] md:mt-[12rem] duration-100 transition-all delay-[30ms]">
+        {/* <div
+          className="absolute 
+         w-full text-white z-10 mt-[8rem] md:mt-[12rem] duration-100 transition-all delay-[30ms]"
+        > */}
+        <div
+          className=" 
+         w-full text-white z-30 mt-[8rem] md:mt-[12rem] duration-100 transition-all delay-[30ms]"
+        >
           {/* Info */}
           <MovieDetailInfo movie={movie} credit={credit} />
 
@@ -112,12 +121,15 @@ function MovieDetail() {
           {videoList.length > 0 && <MovieDetailRefYT videoList={videoList} />}
 
           {/* Reviews */}
-          <MovieDetailReviews reviewList={reviewList} />
+          {reviewList.length > 0 && (
+            <MovieDetailReviews reviewList={reviewList} />
+          )}
 
           {/* Recommendations */}
           <MovieDetailRecommendations
             recommendedvideoList={recommendedvideoList}
           />
+          {/* <Footer /> */}
         </div>
         <Box
           className="fade-bottom"
@@ -125,9 +137,10 @@ function MovieDetail() {
             height: "150%",
             backgroundImage:
               "linear-gradient(180deg,transparent,rgba(27, 27, 27, 0.61),#000)",
-            position: "absolute",
+            position: "fixed",
             width: "100%",
             bottom: "0",
+            zIndex: "-1",
           }}
         ></Box>
       </div>

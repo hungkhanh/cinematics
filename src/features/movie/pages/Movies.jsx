@@ -7,7 +7,7 @@ function Movies() {
   //muon render dong thoi song song thi call o day roi nhet vao 1 mang chung roi pass prop
 
   return (
-    <div>
+    <div className="bg-[#111]">
       <MoviesBanner />
       <div className="pt-8 mx-8">
         <MoviesRow title="Trending" fetchUrl={requests.fetchTrending} />

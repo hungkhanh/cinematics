@@ -36,7 +36,9 @@ function Header() {
   return (
     <div
       className={`${
-        showNav ? "bg-[#080808]" : ""
+        showNav
+          ? "bg-[#080808] border-b-2 border-b-orange-600 shadow-amber-600/50 shadow-lg"
+          : ""
       } w-full fixed top-0 z-50 text-white flex justify-between 
       items-center py-[2.25rem] transition-all ease-in delay-[150ms] `}
     >

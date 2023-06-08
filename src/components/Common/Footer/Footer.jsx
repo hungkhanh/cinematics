@@ -9,7 +9,7 @@ function Footer() {
       className="sm:block text-[#ccc] 
     px-[2rem] sm:px-[3rem] lg:px-[7rem] xl:px-[10rem] pt-[2rem] lg:pt-[3rem] 
    pb-[1rem] sm:pb-[2rem]
-     leading-[1.5rem] sm:leading-[1.9rem] lg:leading-[2.25rem]"
+     leading-[1.5rem] sm:leading-[1.9rem] lg:leading-[2.25rem] z-10 bg-[#111] w-full"
     >
       <div className="flex gap-2 items-center mb-3">
         <FacebookIcon sx={{ fontSize: "2.5rem" }} />
