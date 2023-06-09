@@ -10,7 +10,7 @@ export function MainLayout() {
     <Box>
       <Header />
       <Outlet />
-      {/* <Footer /> */}
+      <Footer />
     </Box>
   );
 }

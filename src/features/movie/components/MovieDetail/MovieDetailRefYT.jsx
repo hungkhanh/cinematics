@@ -18,7 +18,7 @@ function MovieDetailRefYT({ videoList }) {
          lg:max-h-[30rem] xl:max-h-[34rem] 2xl:max-h-[40rem] 
          duration-100 transition-all delay-[30ms]"
             controls
-            url={`https://www.youtube.com/watch?v=${video?.key}`}
+            // url={`https://www.youtube.com/watch?v=${video?.key}`}
             muted
             width="100%"
             height="40rem"

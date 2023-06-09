@@ -3,12 +3,11 @@ import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { MainLayout } from "./components/Layout";
 import LoginPage from "./features/auth/pages/LoginPage";
 import RegisterPage from "./features/auth/pages/RegisterPage";
-import Movies from "./features/movie/pages/Movies";
-import TV from "./features/tv/pages/TV";
-import TestFb from "./components/testFb";
-import TVDetail from "./features/tv/components/TVDetail";
-import SearchPage from "./features/search/pages/SearchPage";
 import MovieDetail from "./features/movie/pages/MovieDetail";
+import Movies from "./features/movie/pages/Movies";
+import SearchPage from "./features/search/pages/SearchPage";
+import TVDetail from "./features/tv/components/TVDetail";
+import TV from "./features/tv/pages/TV";
 
 function App() {
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ function App() {
       <Route path="/" element={<Navigate to="/login" />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/test" element={<TestFb />} />
       <Route element={<MainLayout />}>
         <Route path="/movies" element={<Movies />} />
         <Route path="/movie/:movie_id" element={<MovieDetail />} />

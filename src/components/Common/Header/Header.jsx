@@ -40,7 +40,7 @@ function Header() {
           ? "bg-[#080808] border-b-2 border-b-orange-600 shadow-amber-600/50 shadow-lg"
           : ""
       } w-full fixed top-0 z-50 text-white flex justify-between 
-      items-center py-[2.25rem] transition-all ease-in delay-[150ms] `}
+      items-center py-[2.25rem] transition-all ease-linear delay-[150ms] `}
     >
       <div
         className={`flex items-center gap-2 fixed z-50 left-9 text-[1.9rem] font-bold ${

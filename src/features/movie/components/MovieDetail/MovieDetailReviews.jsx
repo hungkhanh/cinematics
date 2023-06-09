@@ -19,9 +19,18 @@ function MovieDetailReviews({ reviewList }) {
       </div>
 
       {/* Guest reviews */}
-      {sortedTimestamps(reviewList).map((rev) => (
-        <MovieDetailGuestReviews key={rev.id} rev={rev} />
-      ))}
+      {reviewList.length > 0 ? (
+        sortedTimestamps(reviewList).map((rev) => (
+          <MovieDetailGuestReviews key={rev.id} rev={rev} />
+        ))
+      ) : (
+        <div
+          className="text-white text-center text-[2rem] mb-[1.5rem] bg-[#222] py-5 px-7 rounded-lg 
+      border-b-2 border-b-lime-500 shadow-lime-500/50 shadow-md"
+        >
+          Be the first to review...
+        </div>
+      )}
     </div>
   );
 }

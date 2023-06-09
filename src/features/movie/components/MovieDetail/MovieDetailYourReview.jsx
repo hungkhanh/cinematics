@@ -12,7 +12,8 @@ function MovieDetailYourReview() {
         <div className="name mb-3 text-2xl font-semibold">Your name</div>
         <textarea
           className="mb-3 bg-[#111] w-full h-[6rem] p-2 outline-none border border-slate-400 
-            rounded-md"
+            rounded-md shadow-md focus:shadow-slate-500/50
+            hover:shadow-slate-500/50"
           placeholder="Write your review..."
         ></textarea>
         <button

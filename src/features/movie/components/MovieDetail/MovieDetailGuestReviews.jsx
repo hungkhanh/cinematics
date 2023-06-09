@@ -7,7 +7,7 @@ function MovieDetailGuestReviews({ rev }) {
   return (
     <div
       className="text-white flex gap-4 mb-[1.5rem] bg-[#222] py-5 px-7 rounded-lg 
-        border-b-2 border-b-lime-600 "
+        border-b-2 border-b-lime-500 shadow-lime-500/50 shadow-md"
     >
       <img
         className="w-[3rem] h-[3rem] rounded-full"
